@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 07:56:02 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/02 09:00:35 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/02 09:48:14 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iostream>
 #include <vector>
 
-void	ft_get_best_elf(std::vector<int> &elf)
+int	ft_get_best_elf(std::vector<int> &elf)
 {
 	int	bestElf = 0;
 	int max = 0;
@@ -29,6 +29,7 @@ void	ft_get_best_elf(std::vector<int> &elf)
 	std::cout << "Best elf is: " << bestElf << " he carries "
 		<< max  << " calories." << std::endl;
 	elf[bestElf] = 0;
+	return (max);
 }
 
 int main(void)
@@ -50,9 +51,11 @@ int main(void)
 		else
 			number += atoi(buffer.c_str());
 	}
-	ft_get_best_elf(elf);
-	ft_get_best_elf(elf);
-	ft_get_best_elf(elf);
+	int max;
+	max = ft_get_best_elf(elf);
+	max += ft_get_best_elf(elf);
+	max += ft_get_best_elf(elf);
+	std::cout << "The top 3 elves carry: " << max << " calories." << std::endl;
 	infile.close();
 	return (0);
 }
