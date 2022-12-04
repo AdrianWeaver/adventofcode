@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 07:56:02 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/04 17:50:26 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/04 17:58:20 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ void	ft_get_limits(std::string input, int &elfOneLowerLimit, int &elfOneUpperLim
 
 int	ft_check_overlap(int firstLower, int firstUpper, int secondLower, int secondUpper)
 {
-	if (firstLower >= secondLower && firstUpper <= secondUpper)
+	if (firstLower >= secondLower && firstLower <= secondUpper)
+		return (1);
+	else if (firstUpper >= secondLower && firstUpper <= secondUpper)
 		return (1);
 	else
 		return (0);
