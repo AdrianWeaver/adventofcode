@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 07:56:02 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/04 19:53:59 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/04 20:04:57 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,23 @@ void	ft_split_halves(std::string input, std::string &firstHalf, std::string &sec
 	return ;
 }
 
-int	ft_check_duplicates(std::string firstHalf, std::string secondHalf)
+int	ft_check_duplicates(std::string firstLine, std::string secondLine, std::string thirdLine)
 {
 	int	tab[255];
 	int ret = 0;
 
 	for (int i = 0; i < 255; i++)
 		tab[i] = 0;
-	for (int i = 0; i < firstHalf.size(); i++)
-		tab[firstHalf[i]] = 1;
-	for (int i = 0; i < secondHalf.size(); i++)
-		if (tab[secondHalf[i]] == 1)
+	for (int i = 0; i < firstLine.size(); i++)
+		tab[firstLine[i]] = 1;
+	for (int i = 0; i < secondLine.size(); i++)
+		if (tab[secondLine[i]] == 1)
+			tab[secondLine[i]]++;
+	for (int i = 0; i < thirdLine.size(); i++)
+		if (tab[thirdLine[i]] == 2)
 		{
-			ret += ft_get_priorities(secondHalf[i]);
-			//std::cout << "letter: " << secondHalf[i] << " ret: " << ret << std::endl;
-			tab[secondHalf[i]] = -1;
+			ret += ft_get_priorities(thirdLine[i]);
+			tab[thirdLine[i]] = -1;
 		}
 	return (ret);
 }
@@ -60,19 +62,26 @@ int main(void)
 	int					duplicates;
 	int					totalPriorities;
 
+	std::string firstLine, secondLine, thirdLine;
 	infile.open("input", std::fstream::in);
 	while (std::getline(infile, buffer))
 	{
-		std::string firstHalf, secondHalf;
 		int			hasDuplicates = 0;
-		ft_split_halves(buffer, firstHalf, secondHalf);
-		hasDuplicates += ft_check_duplicates(firstHalf, secondHalf);
-		if (hasDuplicates)
+		if (elfNumber % 3 == 0)
+			firstLine = buffer;
+		else if (elfNumber % 3 == 1)
+			secondLine = buffer;
+		else if (elfNumber % 3 == 2)
 		{
-			duplicates++;
-			totalPriorities += hasDuplicates;
-			//std::cout << "elf number: " << elfNumber << " has duplicate items" << std::endl;
-			//std::cout << "priorities: " << hasDuplicates << std::endl;
+			thirdLine = buffer;
+			hasDuplicates += ft_check_duplicates(firstLine, secondLine, thirdLine);
+			if (hasDuplicates)
+			{
+				duplicates++;
+				totalPriorities += hasDuplicates;
+				//std::cout << "elf number: " << elfNumber << " has duplicate items" << std::endl;
+				//std::cout << "priorities: " << hasDuplicates << std::endl;
+			}
 		}
 		elfNumber++;
 	}
