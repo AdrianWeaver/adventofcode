@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 07:56:02 by aweaver           #+#    #+#             */
-/*   Updated: 2022/12/05 07:22:33 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/12/05 07:26:49 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,10 @@ int main(void)
 			//std::cout << "destination: " << destination << std::endl;
 			for (int i = 0; i < iteration; i++)
 			{
-				stack[destination].insert(stack[destination].begin(), stack[origin][0]);
-				stack[origin].erase(stack[origin].begin());
+				stack[destination].insert(stack[destination].begin() + i, stack[origin][i]);
 			}
+			for (int i = 0; i < iteration; i++)
+				stack[origin].erase(stack[origin].begin());
 		}
 	}
 	for (int i = 1; i < 10; i++)
